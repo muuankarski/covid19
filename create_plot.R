@@ -7,6 +7,9 @@ library(hrbrthemes)
 library(tidyverse)
 library(jsonlite)
 
+fontname <- "Arial"
+Sys.setlocale("LC_ALL", "fi_FI.utf8")
+
 cols(
   Alue = col_character(),
   Aika = col_date(format = ""),
@@ -15,7 +18,7 @@ cols(
 
 xdf_raw <- read_csv2("https://sampo.thl.fi/pivot/prod/fi/epirapo/covid19case/fact_epirapo_covid19case.csv?row=dateweek2020010120201231-443702L&column=hcd-444832#", col_types = cov_cols)
 xdf <- xdf_raw %>% 
-  filter(!grepl("Kaikki", Alue)) %>% 
+  # filter(!grepl("Kaikki", Alue)) %>% 
   rename(date = Aika, 
          shp = Alue, 
          day_cases = val) %>% 
@@ -62,7 +65,7 @@ gdf %>%
       ) +
       labs(x = NULL, y = NULL, subtitle = .x) +
       # theme_ipsum_es(grid="XY", subtitle_family = font_es_bold, subtitle_face = "bold") +
-      theme_ipsum_es(grid="XY", subtitle_family = "PT Sans", base_family = "PT Sans", subtitle_face = "bold") +
+      theme_ipsum_es(grid="XY", subtitle_family = fontname, base_family = fontname, subtitle_face = "bold") +
       theme(panel.spacing = unit(0, "lines")) +
       theme(panel.spacing.y = unit(0, "lines")) +
       theme(axis.text.x = element_text(size = 10)) +
@@ -75,7 +78,7 @@ gdf %>%
       scale_x_date(limits = range(gdf$date)) +
       labs(x = NULL, y = NULL) + 
       # theme_ipsum_es(grid="Y", axis_text_size = 6) +
-      theme_ipsum_es(grid="Y", axis_text_size = 6, base_family = "PT Sans") +
+      theme_ipsum_es(grid="Y", axis_text_size = 6, base_family = fontname) +
       theme(axis.text.x = element_blank()) +
       theme(panel.spacing = unit(0, "lines")) +
       theme(panel.spacing.y = unit(0, "lines")) +
@@ -100,7 +103,7 @@ wrap_plots(gg_x, ncol = 4) +
     title = "SARS-Cov-2 -tapausten  aikasarjat sairaanhoitopiireittäin",
     subtitle = "Jokaisen paneelin ylempi kuva esittää vahvistettujen koronatapausten kertymän sairaanhoitopiireittäin logaritmisella asteikolla.\nAlempi kuva näyttää näyttää päivittäiset tapausmäärät (huomaa vaihteleva y-akseli). Sairaanhoitopiirit järjestetty tapausmäärien mukaan suurimmasta pienimpään",
     caption = sprintf("Päivitetty: %s; \nData: THL <https://sampo.thl.fi/pivot/prod/api/epirapo/covid19case.json>;\nKoodin lähde: <https://rud.is/>", Sys.time()),
-    theme = theme_minimal(base_family = "PT Sans", base_size = 14) + theme(plot.title = element_text(face = "bold", size = 18))
+    theme = theme_minimal(base_family = fontname, base_size = 12) + theme(plot.title = element_text(face = "bold", size = 16))
   ) -> pp
 ggsave(filename = tf1, plot = pp, width = 14, height = 25)  
 
