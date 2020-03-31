@@ -12,7 +12,7 @@ Koodi kuvan tekemiseen scriptissä: `plot_code.R`
 Tässä repossa oleva svg-kuva upotettuna:
 
 
-![](https://raw.githubusercontent.com/muuankarski/covid19/master/shp_fi.svg)
+<object type="image/svg+xml" data='https://raw.githubusercontent.com/muuankarski/covid19/master/shp_fi.svg?sanitize=true' width='70%'></object>
 
 
 ****
