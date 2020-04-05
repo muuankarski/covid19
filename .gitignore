@@ -9,6 +9,7 @@ sync_to_server.R
 sync_to_server_test.R
 shp_fi.svg
 shp_en.svg
-shp_with-fonts.svg
+shp-with-fonts.svg
 create_plot.R
 thl_api_test
+en/
