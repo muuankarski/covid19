@@ -6,5 +6,9 @@ covid19.Rproj
 index.html
 shp.svg
 sync_to_server.R
+sync_to_server_test.R
 shp_fi.svg
+shp_en.svg
+shp_with-fonts.svg
 create_plot.R
+thl_api_test
