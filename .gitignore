@@ -6,3 +6,5 @@ covid19.Rproj
 index.html
 shp.svg
 sync_to_server.R
+shp_fi.svg
+create_plot.R
