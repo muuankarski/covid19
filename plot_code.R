@@ -190,7 +190,7 @@ file.create(tf1)
 wrap_plots(gg_x_fi, ncol = 3) +
   plot_annotation(
     title = "SARS-Cov-2 -tapausten  aikasarjat sairaanhoitopiireittäin",
-    subtitle = sprintf("Jokaisen paneelin ylempi kuva esittää vahvistettujen koronatapausten kertymän sairaanhoitopiireittäin logaritmisella asteikolla\nAlempi kuva näyttää näyttää päivittäiset tapausmäärät (huomaa vaihteleva y-akseli).\nSairaanhoitopiirit järjestetty tapausmäärien mukaan suurimmasta pienimpään\nPäivitetty: %s (Päivittyy joka aamu 10.00)\nDatan uusin päivä: %s",Sys.time(),max(gdf$date)),
+    subtitle = sprintf("Jokaisen paneelin ylempi kuva esittää vahvistettujen koronatapausten kertymän sairaanhoitopiireittäin logaritmisella asteikolla\nAlempi kuva näyttää näyttää päivittäiset tapausmäärät (huomaa vaihteleva y-akseli).\nSairaanhoitopiirit järjestetty tapausmäärien mukaan suurimmasta pienimpään\nPäivitetty: %s (Päivittyy päivittäin 12.00)\nDatan uusin päivä: %s",Sys.time(),max(gdf$date)),
     caption = "Data: THL <https://sampo.thl.fi/pivot/prod/api/epirapo/covid19case.json>;\nKoodin lähde: <https://rud.is/>",
     theme = theme_minimal(base_family = fontname, base_size = 15) + theme(plot.title = element_text(face = "bold", size = 20))
   ) -> pp
@@ -208,7 +208,7 @@ Sys.setlocale("LC_ALL", "en_US.UTF-8")
 wrap_plots(gg_x_en, ncol = 3) +
   plot_annotation(
     title = "SARS-Cov-2 Timeline Trajectories: Health Districts in Finland",
-    subtitle = sprintf("For each panel, the top chart represents the cumulative case count to-date for each health district on a log scale\nThe bottom chart marks the number of cases reported each day (note free Y scale).\nHealth districts ordered from most cases to least\nUpdated: %s (Refreshed every morning at 10.00)\nLatest date in data: %s",as.character(Sys.time()),as.character(max(gdf$date))),
+    subtitle = sprintf("For each panel, the top chart represents the cumulative case count to-date for each health district on a log scale\nThe bottom chart marks the number of cases reported each day (note free Y scale).\nHealth districts ordered from most cases to least\nUpdated: %s (Refreshed daily at 12.00)\nLatest date in data: %s",as.character(Sys.time()),as.character(max(gdf$date))),
     caption = "Data: THL <https://sampo.thl.fi/pivot/prod/api/epirapo/covid19case.json>;\nCode: <https://rud.is/>",
     theme = theme_minimal(base_family = fontname, base_size = 15) + theme(plot.title = element_text(face = "bold", size = 20))
   ) -> pp
