@@ -3,6 +3,9 @@ library(patchwork)
 library(hrbrthemes)
 library(tidyverse)
 library(jsonlite)
+library(svglite)
+# remotes::install_github("ellisp/frs-r-package/pkg")
+library(frs)
 
 
 fontname <- "PT Sans"
