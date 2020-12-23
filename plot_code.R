@@ -17,18 +17,26 @@ cols(
   val = col_double()
 ) -> cov_cols
 
-
-xdf_raw <- read_csv2("https://sampo.thl.fi/pivot/prod/fi/epirapo/covid19case/fact_epirapo_covid19case.csv?row=dateweek2020010120201231-443702L&column=hcdmunicipality2020-445222L", col_types = cov_cols)
-xdf <- xdf_raw %>% 
-  # filter(!grepl("Kaikki", Alue)) %>% 
-  rename(date = Aika, 
-         shp = Alue, 
-         day_cases = val) %>% 
-  group_by(shp) %>% 
-  arrange(shp,date) %>% 
-  filter(!is.na(day_cases)) %>% 
-  mutate(total_cases = cumsum(day_cases)) %>% 
-  ungroup()
+thl_korona_api <- "https://sampo.thl.fi/pivot/prod/fi/epirapo/covid19case/fact_epirapo_covid19case.csv?row=dateweek20200101-508804L&column=hcdmunicipality2020-445222L"
+status <- httr::status_code(httr::GET(thl_korona_api))
+if (status == 200){
+  xdf_raw <- read_csv2(thl_korona_api, col_types = cov_cols)
+  xdf <- xdf_raw %>% 
+    # filter(!grepl("Kaikki", Alue)) %>% 
+    rename(date = Aika, 
+           shp = Alue, 
+           day_cases = val) %>% 
+    group_by(shp) %>% 
+    arrange(shp,date) %>% 
+    filter(!is.na(day_cases)) %>% 
+    mutate(total_cases = cumsum(day_cases)) %>% 
+    ungroup()
+  xdf$updated <- Sys.Date()
+  saveRDS(xdf, "./thl_apidata.RDS")
+} else {
+  # haetaan uusin data jostain?
+  xdf <- readRDS("./thl_apidata.RDS")
+}
 
 xdf %>% 
   filter(total_cases != 0) %>%
@@ -99,15 +107,33 @@ gdf %>%
 
 
 # in English
-
-
 cols(
   Area = col_character(),
   Time = col_date(format = ""),
   val = col_double()
 ) -> cov_cols
 
-xdf_raw <- read_csv2("https://sampo.thl.fi/pivot/prod/en/epirapo/covid19case/fact_epirapo_covid19case.csv?row=dateweek2020010120201231-443702L&column=hcdmunicipality2020-445222L", col_types = cov_cols)
+thl_korona_api <- "https://sampo.thl.fi/pivot/prod/en/epirapo/covid19case/fact_epirapo_covid19case.csv?row=dateweek20200101-508804L&column=hcdmunicipality2020-445222L"
+status <- httr::status_code(httr::GET(thl_korona_api))
+if (status == 200){
+  xdf_raw <- read_csv2(thl_korona_api, col_types = cov_cols)
+  xdf <- xdf_raw %>% 
+    # filter(!grepl("Kaikki", Alue)) %>% 
+    rename(date = Time, 
+           shp = Area, 
+           day_cases = val) %>% 
+    group_by(shp) %>% 
+    arrange(shp,date) %>% 
+    filter(!is.na(day_cases)) %>% 
+    mutate(total_cases = cumsum(day_cases)) %>% 
+    ungroup()
+  xdf$updated <- Sys.Date()
+  saveRDS(xdf, "./thl_apidata_en.RDS")
+} else {
+  # haetaan uusin data jostain?
+  xdf <- readRDS("./thl_apidata_en.RDS")
+}
+
 xdf <- xdf_raw %>% 
   # filter(!grepl("Kaikki", Alue)) %>% 
   rename(date = Time, 
