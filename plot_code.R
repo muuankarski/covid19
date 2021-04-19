@@ -79,7 +79,8 @@ gdf %>%
       theme_ipsum_es(grid="XY", subtitle_family = fontname, base_family = fontname, subtitle_face = "bold") +
       theme(panel.spacing = unit(0, "lines")) +
       theme(panel.spacing.y = unit(0, "lines")) +
-      theme(axis.text.x = element_text(size = 12)) +
+      theme(axis.text.x = element_text(size = 8),
+            axis.text.y = element_text(size = 8)) +
       theme(plot.margin = margin(10, 10, 6, 10)) -> gg2
     
     # individual day counts bars 
@@ -186,7 +187,8 @@ gdf %>%
       theme_ipsum_es(grid="XY", subtitle_family = fontname, base_family = fontname, subtitle_face = "bold") +
       theme(panel.spacing = unit(0, "lines")) +
       theme(panel.spacing.y = unit(0, "lines")) +
-      theme(axis.text.x = element_text(size = 12)) +
+      theme(axis.text.x = element_text(size = 8),
+            axis.text.y = element_text(size = 8)) +
       theme(plot.margin = margin(10, 10, 6, 10)) -> gg2
     
     # individual day counts bars 
